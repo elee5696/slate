@@ -1,0 +1,190 @@
+basePath: /common
+definitions:
+  BadRequestResponse:
+    description: Response for bad requests
+    properties:
+      message: {type: string}
+    type: object
+  ErrorResponse:
+    description: Response for internal server error
+    properties:
+      ERROR: {type: string}
+    type: object
+  GetSitesResponse:
+    description: Successful response from /sites endpoint
+    items:
+      properties:
+        active_date: {format: date-time, type: string}
+        city: {format: string, type: string}
+        contact_1_email: {format: string, type: string}
+        contact_1_fax: {format: string, type: string}
+        contact_1_name: {format: string, type: string}
+        contact_1_phone: {format: string, type: string}
+        contact_1_title: {format: string, type: string}
+        contact_2_email: {format: string, type: string}
+        contact_2_fax: {format: string, type: string}
+        contact_2_name: {format: string, type: string}
+        contact_2_phone: {format: string, type: string}
+        contact_2_title: {format: string, type: string}
+        country_code: {format: string, type: string}
+        dma_code: {format: string, type: string}
+        ip_address_1: {format: string, type: string}
+        ip_address_2: {format: string, type: string}
+        national_code: {format: string, type: string}
+        operator: {format: string, type: string}
+        owner: {format: string, type: string}
+        pod_count: {type: integer}
+        postal_code: {format: string, type: string}
+        sales_tax_registration: {format: string, type: string}
+        site_id: {format: string, type: string}
+        site_legalname: {format: string, type: string}
+        site_name: {format: string, type: string}
+        site_notes: {format: string, type: string}
+        site_open: {type: boolean}
+        site_shortname: {format: string, type: string}
+        state: {format: string, type: string}
+        street_address: {format: string, type: string}
+        tech_support_1_email: {format: string, type: string}
+        tech_support_1_name: {format: string, type: string}
+        tech_support_1_phone: {format: string, type: string}
+        tech_support_1_title: {format: string, type: string}
+        ticketing_partner_id: {format: string, type: string}
+        tz: {format: string, type: string}
+      required: [country_code, pod_count, site_id, site_legalname, site_name, street_address,
+        tz]
+      type: object
+    type: array
+  GetTitlesResponse:
+    description: Successful response from /titles endpoint
+    items:
+      properties:
+        content_partner_id: {format: string, type: string}
+        duration_sec: {type: number}
+        eidr_id: {format: string, type: string}
+        game_engine: {format: string, type: string}
+        genre: {format: string, type: string}
+        isan_id: {format: string, type: string}
+        licensed_sites:
+          items:
+            properties:
+              active_date: {format: date, type: string}
+              end_date: {format: date, type: string}
+              site_id: {format: string, type: string}
+              ticketing_active_time: {format: date-time, type: string}
+              ticketing_end_date: {format: date, type: string}
+              ticketing_partner_title_id: {format: string, type: string}
+            type: object
+          type: array
+        max_player_count: {type: integer}
+        min_player_count: {type: integer}
+        rating: {format: string, type: string}
+        release_date: {format: date-time, type: string}
+        shortname: {format: string, type: string}
+        synopsis: {format: string, type: string}
+        title_id: {format: string, type: string}
+        title_version: {format: string, type: string}
+      required: [content_partner_id, shortname, title_id]
+      type: object
+    type: array
+  NotFoundResponse:
+    description: Requested resource doesn't exist
+    properties:
+      message: {type: string}
+    type: object
+  UnauthorizedResponse:
+    description: Response for requests with missing/invalid jwt
+    properties:
+      message: {type: string}
+    type: object
+host: api.techscapevr.com
+info: {description: '# CRMLink Common API
+
+    ## Purpose
+
+    CRMLink Common API contains common functionality that will be required in multiple
+    workflows.
+
+    ', title: prod-crmlink-common, version: '2020-02-10T20:41:51Z'}
+paths:
+  /languages/{titleid}:
+    get:
+      description: '# Get list of languages for a specific Dreamscape title
+
+        ## Parameter Reference
+
+        Name | Type | Format | default | minimum | maximum | pattern
+
+        ---- | ---- | ------ | ------- | ------- | ------- | -------
+
+        titleid | `string` | `string` |  |  |  |
+
+        '
+      parameters:
+      - {description: identifier for a Dreamscape title, format: string, in: path,
+        name: titleid, required: true, type: string}
+      produces: [application/json]
+      responses:
+        200: {description: 200 response}
+        400:
+          description: 400 response
+          schema: {$ref: '#/definitions/BadRequestResponse'}
+        401:
+          description: 401 response
+          schema: {$ref: '#/definitions/UnauthorizedResponse'}
+        404:
+          description: 404 response
+          schema: {$ref: '#/definitions/NotFoundResponse'}
+        500:
+          description: 500 response
+          schema: {$ref: '#/definitions/ErrorResponse'}
+      security:
+      - api_key: []
+      summary: Get languages for a specific Dreamscape title
+  /sites:
+    get:
+      description: '# Get all configured Dreamscape locations
+
+        '
+      produces: [application/json]
+      responses:
+        200:
+          description: 200 response
+          schema: {$ref: '#/definitions/GetSitesResponse'}
+        401:
+          description: 401 response
+          schema: {$ref: '#/definitions/UnauthorizedResponse'}
+        404:
+          description: 404 response
+          schema: {$ref: '#/definitions/NotFoundResponse'}
+        500:
+          description: 500 response
+          schema: {$ref: '#/definitions/ErrorResponse'}
+      security:
+      - api_key: []
+      summary: Get site locations
+  /titles:
+    get:
+      description: '# Get list of all available Dreamscape titles
+
+        '
+      produces: [application/json]
+      responses:
+        200:
+          description: 200 response
+          schema: {$ref: '#/definitions/GetTitlesResponse'}
+        401:
+          description: 401 response
+          schema: {$ref: '#/definitions/UnauthorizedResponse'}
+        404:
+          description: 404 response
+          schema: {$ref: '#/definitions/NotFoundResponse'}
+        500:
+          description: 500 response
+          schema: {$ref: '#/definitions/ErrorResponse'}
+      security:
+      - api_key: []
+      summary: Get titles
+schemes: [https]
+securityDefinitions:
+  api_key: {in: header, name: x-api-key, type: apiKey}
+swagger: '2.0'

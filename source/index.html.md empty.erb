@@ -1,0 +1,244 @@
+---
+title: API Reference
+
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell
+
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+
+includes:
+  - errors
+
+search: true
+
+code_clipboard: true
+---
+
+# Introduction
+
+Welcome to the Dreamscape Immersive API! You can use our API to access Dreamscape Immersive API endpoints.
+
+<aside class="notice">
+Authentication for most resources are handled by an API key
+To obtain a valid public API key for testing, please contact 
+tclifton@dreamscapevr.com
+</aside>
+
+# Common
+
+## Title languages
+Get languages for a specific Dreamscape title
+
+### Request Information
+|Category|Value|
+|---------|-------|
+|Http request| `GET`|
+|URL|api.techscapevr.com/common/languages/{titleID}|
+
+```shell
+curl --location --request GET 'https://api.hq.dev.techscapevr.com/common/languages/alienzoo01' --header 'x-api-key: <public-api-key>'
+```
+
+### Request Parameters
+|Parameter| Type| Description| Required|
+|------------|-----|------------|---------|
+|titleID|`string`|Identifier for a Dreamscape title (e.g. `alienzoo01`)|`true`|
+
+> Sample response:
+
+```json
+[
+    {
+        "language_code": "en",
+        "language_name": "English",
+        "written": true,
+        "audio": true,
+        "native_name": null
+    },
+    {
+        ...
+    },
+    {
+        ...
+    }
+]
+```
+
+### Response Schema
+|Field|Type|Description|
+|-----|----|-----------|
+|language_code| `string`| Two-letter ISO 639-1 code for the language|
+|language_name| `string`| Full name of the language|
+|written| `boolean`|
+|audio| `boolean`|
+|native_name| `string`|
+
+## Sites
+Get Dreamscape retail site information
+
+### Request Information
+|Category|Value|
+|---------|-------|
+|Http request| `GET`|
+|URL|api.techscapevr.com/common/sites|
+
+```shell
+curl --location --request GET 'https://api.hq.dev.techscapevr.com/common/sites' --header 'x-api-key: <public-api-key>'
+```
+
+### Request Parameters
+There are no parameters for this request.
+
+> Sample response:
+
+```json
+[
+    {
+        "site_id": "US000001",
+        "site_name": "Westfield Century City Mall",
+        "site_shortname": "hq-dev-Westfield",
+        "site_legalname": "Westfield Century City",
+        "owner": "Dreamscape",
+        "operator": "Dreamscape",
+        "national_code": null,
+        "street_address": "10250 Santa Monica Blvd",
+        "city": "Los Angeles",
+        "state": "CA",
+        "postal_code": "90067",
+        "country_code": "us",
+        "tz": "America/Los_Angeles",
+        "pod_count": 3,
+        "ticketing_partner_id": "xola",
+        "dma_code": null,
+        "active_date": "2018-10-20T08:00:00+00:00",
+        "tlc": "WCC",
+        "status_code": 1100,
+        "status_description": "active"
+    },
+    {
+        ...
+    },
+    {
+        ...
+    }
+]
+```
+
+### Response Schema
+|Field|Type|Description|
+|-----|------------|------|
+|site_id|`string`|Identifier for site|
+|site_name|`string`|Full Name of site|
+|site_shortname|`string`|Shorthand name of site|
+|site_legalname|`string`|Legal name of site|
+|owner|`string`|Owner of site|
+|operator|`string`|Operator of site|
+|national_code|`string`|
+|street_address|`string`|Street Address of site|
+|city|`string`|
+|state|`string`|
+|postal_code|`string`|
+|country_code|`string`|
+|tz|`string`|
+|pod_count|`string`|
+|ticketing_partner_id|`string`|
+|dma_code|`string`|
+|active_date|`string`|
+|tlc|`string`|
+|status_code|`string`|
+|status_description|`string`|
+
+
+## Titles
+
+```shell
+curl --location --request GET 'https://api.hq.dev.techscapevr.com/common/titles' --header 'x-api-key: <public-api-key>'
+```
+
+>Sample response
+
+```json
+[
+    {
+        "title_id": "alienzoo01",
+        "shortname": "Alien Zoo",
+        "synopsis": "Alien Zoo Synopsis...",
+        "genre": null,
+        "rating": "E",
+        "content_partner_id": "amblin",
+        "duration_sec": null,
+        "max_player_count": 6,
+        "release_date": "2018-02-06",
+        "game_engine": "unity",
+        "eidr_id": null,
+        "isan_id": null,
+        "min_player_count": 1,
+        "tlc": "AZO",
+        "status_code": 1100,
+        "closed_caption_enabled": true,
+        "licensed_sites": [
+            {
+                "site_id": "US000001",
+                "ticketing_partner_title_id": "alienzoo01",
+                "ticketing_active_time": "2019-04-11T07:00:00+00:00",
+                "ticketing_end_date": null,
+                "active_date": "2019-04-15",
+                "sunset_date": null,
+                "end_date": null,
+                "gearup_duration_sec": 2400,
+                "pod_duration_sec": 1200,
+                "base_price": 23.5,
+                "currency": "USD",
+                "min_age": 10,
+                "min_age_waiver": 13,
+                "license_status_code": 1100,
+                "site_status_code": 1100
+            },
+            {
+                ...
+            },
+        ]
+    },
+    {
+        ...
+    },
+    {
+        ...
+    }
+]
+```
+
+Get Dreamscape Titles
+
+### Request Information
+|Category    |Value|
+|------------|-----|
+|Http request|`GET`|
+|URL|api.techscapevr.com/common/titles|
+
+### Request Parameters
+There are no parameters for this request.
+
+### Response Schema
+
+|Field| Description|
+|-----|------------|
+|title_id|`string`|
+|shortname|`string`|
+|synopsis|`string`|
+|genre|`string`|
+|rating|`string`|
+|content_partner_id|`string`|
+|duration_sec|`int`|
+|max_player_count|`int`|
+|release_date||`string`|
+|game_engine|`string`|
+|eidr_id||`string`|
+|isan_id||`string`|
+|min_player_count|`int`|
+|tlc|`string`|
+|status_code|`int`|
+|closed_caption_enabled|`boolean`|
+|licensed_sites|`object`|
