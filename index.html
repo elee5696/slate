@@ -5,10 +5,6 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta
-            name="description"
-            content="Documentation for the Kittn API"
-        >
     <title>API Reference</title>
 
     <style media="screen">
@@ -286,16 +282,17 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+    <link href="images/favicon-07b1b079.ico" rel="icon" type="image/ico" />
+    <link href="stylesheets/screen-f9df568f.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-b12a2749.js"></script>
+      <script src="javascripts/all-a9fde460.js"></script>
 
     <script>
       $(function() { setupCodeCopy(); });
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -303,12 +300,10 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-1e815a84.png" class="logo" alt="" />
+      <img src="images/logo-edbeddc5.png" class="logo" alt="" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="shell">cURL</a>
+              <a href="#" data-language-name="python">Python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -322,25 +317,32 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
-                  </li>
-                  <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#http-codes" class="toc-h2 toc-link" data-title="HTTP Codes">HTTP Codes</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#crmlink-common-api" class="toc-h1 toc-link" data-title="CRMLink Common API">CRMLink Common API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#purpose" class="toc-h2 toc-link" data-title="Purpose">Purpose</a>
+                  </li>
+                  <li>
+                    <a href="#languages" class="toc-h2 toc-link" data-title="Languages">Languages</a>
+                  </li>
+                  <li>
+                    <a href="#sites" class="toc-h2 toc-link" data-title="Sites">Sites</a>
+                  </li>
+                  <li>
+                    <a href="#titles" class="toc-h2 toc-link" data-title="Titles">Titles</a>
+                  </li>
+              </ul>
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -348,250 +350,603 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Dreamscape Immersive API!</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<p>This API documentation will provide explanations for our various endpoints with examples for the requests and responses you can excpect to see.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Sample Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.hq.dev.techscapevr.com/common/sites'</span> <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;Your API Key&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.hq.dev.techscapevr.com/common/sites'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'&lt;Your API Key&gt;'</span><span class="p">}</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre></div>
+<p>Dreamscape uses API keys for authentication.
+Do not share your API key publicaly, this includes places like GitHub and in your own code.</p>
+
+<p>To make use of your API key include it as a header in your http request</p>
+
+<p><code>x-api-keys: &lt;Your API key&gt;</code></p>
+
+<p>To obtain a valid public API key for testing, please contact 
+<strong>tclifton@dreamscapevr.com</strong></p>
+<h1 id='errors'>Errors</h1><h2 id='http-codes'>HTTP Codes</h2>
+<p>Dreamscape makes use of standard HTTP codes to show the status of a request.
+All responses will have an accompanying code that indicates success or failure.</p>
+
+<p>Error reponses will also have a <code>message</code> that describes the reason for the failure.</p>
+
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Sample Error Message:</p>
 </blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Missing Authentication Token"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200 - OK</td>
+<td>Everything is working as intended</td>
+</tr>
+<tr>
+<td>400 - Bad Request</td>
+<td>The request could not be completed</td>
+</tr>
+<tr>
+<td>401 - Unauthorized</td>
+<td>Your API key doesn&#39;t have permission to perform the request</td>
+</tr>
+<tr>
+<td>403 - Forbidden</td>
+<td>Missing API key</td>
+</tr>
+<tr>
+<td>404 - Not Found</td>
+<td>Request does not exist</td>
+</tr>
+<tr>
+<td>500 - Internal Server Error</td>
+<td>Server side error, an error on our side</td>
+</tr>
+</tbody></table>
+<h1 id='crmlink-common-api'>CRMLink Common API</h1><h2 id='purpose'>Purpose</h2>
+<p>CRMLink Common API contains common functionality that will be required in multiple workflows.
+Information on Dreamscape retail sites, titles, etc can be accessed through this endpoint.</p>
+<h2 id='languages'>Languages</h2>
+<p>This endpoint has information on the languages that are availible for a specific Dreamscape title.
+Use <a href="#titles">title identifiers</a> to search for titles.</p>
+<h3 id='request-information'>Request Information</h3>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Sample Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.hq.dev.techscapevr.com/common/languages/alienzoo01'</span> <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;public-api-key&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.hq.dev.techscapevr.com/common/languages/alienzoo01'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'{API Key}'</span><span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Http request</th>
+<th>URL</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>GET</code></td>
+<td>api.techscapevr.com/common/languages/{titleID}</td>
+</tr>
+</tbody></table>
+<h3 id='request-parameters'>Request Parameters</h3>
+<blockquote>
+<p>Sample Response:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"language_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"language_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"English"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"written"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"audio"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"native_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>titleID</td>
+<td><code>string</code></td>
+<td>Identifier for a Dreamscape title (e.g., <code>alienzoo01</code>)</td>
+<td><code>true</code></td>
+</tr>
+</tbody></table>
+<h3 id='response-schema'>Response Schema</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>language_code</td>
+<td><code>string</code></td>
+<td>Two-letter ISO 639-1 code for the language</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>language_name</td>
+<td><code>string</code></td>
+<td>Full name of the language</td>
+</tr>
+<tr>
+<td>written</td>
+<td><code>boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>audio</td>
+<td><code>boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>native_name</td>
+<td><code>string</code></td>
+<td></td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
+<h2 id='sites'>Sites</h2>
+<p>Information on Dreamscape retail locations are available through this endpoint.</p>
+<h3 id='request-information-2'>Request Information</h3>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Sample Request:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.hq.dev.techscapevr.com/common/sites'</span> <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;public-api-key&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.hq.dev.techscapevr.com/common/sites'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'{API Key}'</span><span class="p">}</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Http request</th>
+<th>URL</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>GET</code></td>
+<td>api.techscapevr.com/common/sites</td>
+</tr>
+</tbody></table>
+<h3 id='request-parameters-2'>Request Parameters</h3>
+<p>There are no parameters for this request.</p>
+<h3 id='response-schema-2'>Response Schema</h3>
+<blockquote>
+<p>Sample Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US000001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"site_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Westfield Century City Mall"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"site_shortname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hq-dev-Westfield"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"site_legalname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Westfield Century City"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dreamscape"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"operator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dreamscape"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"national_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10250 Santa Monica Blvd"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Los Angeles"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90067"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pod_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"ticketing_partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xola"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"dma_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"active_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-20T08:00:00+00:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tlc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WCC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1100</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>site_id</td>
+<td><code>string</code></td>
+<td>Identifier for site</td>
+</tr>
+<tr>
+<td>site_name</td>
+<td><code>string</code></td>
+<td>Full Name of site</td>
+</tr>
+<tr>
+<td>site_shortname</td>
+<td><code>string</code></td>
+<td>Shorthand name of site</td>
+</tr>
+<tr>
+<td>site_legalname</td>
+<td><code>string</code></td>
+<td>Legal name of site</td>
+</tr>
+<tr>
+<td>owner</td>
+<td><code>string</code></td>
+<td>Owner of site</td>
+</tr>
+<tr>
+<td>operator</td>
+<td><code>string</code></td>
+<td>Operator of site</td>
+</tr>
+<tr>
+<td>national_code</td>
+<td><code>string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>street_address</td>
+<td><code>string</code></td>
+<td>Street Address of site</td>
+</tr>
+<tr>
+<td>city</td>
+<td><code>string</code></td>
+<td>City where the site is located</td>
+</tr>
+<tr>
+<td>state</td>
+<td><code>string</code></td>
+<td>State where the site is located</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td><code>string</code></td>
+<td>Postal code of the site</td>
+</tr>
+<tr>
+<td>country_code</td>
+<td><code>string</code></td>
+<td>Shorthand for country where the site is located</td>
+</tr>
+<tr>
+<td>tz</td>
+<td><code>string</code></td>
+<td>Timezone of the site</td>
+</tr>
+<tr>
+<td>pod_count</td>
+<td><code>int</code></td>
+<td>Number of pods at the site</td>
+</tr>
+<tr>
+<td>ticketing_partner_id</td>
+<td><code>string</code></td>
+<td>Partner used for ticketing at the site</td>
+</tr>
+<tr>
+<td>dma_code</td>
+<td><code>string</code></td>
+<td>Designated Market Area, market region indentifier as assigned by <a href="https://www.nielsen.com/us/en/contact-us/intl-campaigns/dma-maps/">Nielsen</a></td>
+</tr>
+<tr>
+<td>active_date</td>
+<td><code>string</code></td>
+<td>The date that the site opened</td>
+</tr>
+<tr>
+<td>tlc</td>
+<td><code>string</code></td>
+<td>Three character indentifier for the site</td>
+</tr>
+<tr>
+<td>status_code</td>
+<td><code>string</code></td>
+<td>Identifier for the status of the site</td>
+</tr>
+<tr>
+<td>status_description</td>
+<td><code>string</code></td>
+<td>Description of the status of the site</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
+<h2 id='titles'>Titles</h2>
+<blockquote>
+<p>Sample Request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.hq.dev.techscapevr.com/common/titles'</span> <span class="nt">--header</span> <span class="s1">'x-api-key: &lt;public-api-key&gt;'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<p>The Kittn API uses the following error codes:</p>
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.hq.dev.techscapevr.com/common/titles'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'{API Key}'</span><span class="p">}</span>
 
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div>
+<p>Information on Dreamscape titles are accessible through this enpoint.
+<code>licensed_sites</code> also contains specific information for sites showing a title (e.g., ticket price).</p>
+<h3 id='request-information-3'>Request Information</h3>
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>HTTP Request</th>
+<th>URL</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td><code>GET</code></td>
+<td>api.techscapevr.com/common/titles</td>
 </tr>
 </tbody></table>
+<h3 id='request-parameters-3'>Request Parameters</h3>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"title_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alienzoo01"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"shortname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alien Zoo"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"synopsis"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alien Zoo Synopsis..."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"genre"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"content_partner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amblin"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"duration_sec"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"max_player_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"release_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-06"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"game_engine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unity"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"eidr_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isan_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"min_player_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tlc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AZO"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1100</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closed_caption_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"licensed_sites"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"site_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US000001"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ticketing_partner_title_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alienzoo01"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ticketing_active_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-11T07:00:00+00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ticketing_end_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"active_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-15"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"sunset_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"end_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"gearup_duration_sec"</span><span class="p">:</span><span class="w"> </span><span class="mi">2400</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"pod_duration_sec"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"base_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">23.5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"min_age"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"min_age_waiver"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"license_status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1100</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"site_status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1100</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="err">...</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>There are no parameters for this request.</p>
+<h3 id='response-schema-3'>Response Schema</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title_id</td>
+<td><code>string</code></td>
+<td>The unique identifier for the title</td>
+</tr>
+<tr>
+<td>shortname</td>
+<td><code>string</code></td>
+<td>Shorthand name for the title</td>
+</tr>
+<tr>
+<td>synopsis</td>
+<td><code>string</code></td>
+<td>Summary of the title</td>
+</tr>
+<tr>
+<td>genre</td>
+<td><code>string</code></td>
+<td>Genre identifiers for the title</td>
+</tr>
+<tr>
+<td>rating</td>
+<td><code>string</code></td>
+<td>ESRB rating for the title</td>
+</tr>
+<tr>
+<td>content_partner_id</td>
+<td><code>string</code></td>
+<td>Co-owners of the titles IP</td>
+</tr>
+<tr>
+<td>duration_sec</td>
+<td><code>int</code></td>
+<td>Total duration</td>
+</tr>
+<tr>
+<td>max_player_count</td>
+<td><code>int</code></td>
+<td>The maximum number of players supported</td>
+</tr>
+<tr>
+<td>release_date</td>
+<td><code>string</code></td>
+<td>Date when the title was released</td>
+</tr>
+<tr>
+<td>game_engine</td>
+<td><code>string</code></td>
+<td>The game engine used to create the title</td>
+</tr>
+<tr>
+<td>eidr_id</td>
+<td><code>string</code></td>
+<td><a href="https://www.eidr.org/about-us/">Entertainment Identifier Registry</a></td>
+</tr>
+<tr>
+<td>isan_id</td>
+<td><code>string</code></td>
+<td><a href="https://www.dga.org/Resources/ISAN.aspx">International Standard Audiovisual Number</a></td>
+</tr>
+<tr>
+<td>min_player_count</td>
+<td><code>int</code></td>
+<td>The minimum number of players needed for the title</td>
+</tr>
+<tr>
+<td>tlc</td>
+<td><code>string</code></td>
+<td>Three letter identifer for the title</td>
+</tr>
+<tr>
+<td>status_code</td>
+<td><code>int</code></td>
+<td>Status identifier</td>
+</tr>
+<tr>
+<td>closed_caption_enabled</td>
+<td><code>boolean</code></td>
+<td>Whether the title has closed captioning</td>
+</tr>
+<tr>
+<td>licensed_sites</td>
+<td><code>object</code></td>
+<td>Sites where the title is showing</td>
+</tr>
+<tr>
+<td>site_id</td>
+<td><code>string</code></td>
+<td>Identifier for site. See <a href="#sites">Sites</a></td>
+</tr>
+<tr>
+<td>ticketing_partner_title_id</td>
+<td><code>string</code></td>
+<td>Identifier for the title as refrenced by ticketing partner</td>
+</tr>
+<tr>
+<td>ticketing_active_time</td>
+<td><code>string</code></td>
+<td>Total time title has been available</td>
+</tr>
+<tr>
+<td>ticketing_end_date</td>
+<td><code>string</code></td>
+<td>Date when title will no longer be available</td>
+</tr>
+<tr>
+<td>active_date</td>
+<td><code>string</code></td>
+<td>Date when title became available</td>
+</tr>
+<tr>
+<td>sunset_date</td>
+<td><code>string</code></td>
+<td>Date when title becomes discontinued</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td><code>string</code></td>
+<td>Date when title became unavailable at a specific site</td>
+</tr>
+<tr>
+<td>gearup_duration_sec</td>
+<td><code>number</code></td>
+<td>The time in seconds it takes to fully gear a player</td>
+</tr>
+<tr>
+<td>pod_duration_sec</td>
+<td><code>number</code></td>
+<td>The time in seconds the pod will be used for the title</td>
+</tr>
+<tr>
+<td>base_price</td>
+<td><code>int</code></td>
+<td>The base price of one ticket for the title</td>
+</tr>
+<tr>
+<td>currency</td>
+<td><code>string</code></td>
+<td>Currency identifer for base_price</td>
+</tr>
+<tr>
+<td>min_age</td>
+<td><code>int</code></td>
+<td>Minimum age required</td>
+</tr>
+<tr>
+<td>min_age_waiver</td>
+<td><code>int</code></td>
+<td>Minimum age required with a signed waiver</td>
+</tr>
+<tr>
+<td>license_status_code</td>
+<td><code>int</code></td>
+<td>Identifier for the status of the license for the title for the site</td>
+</tr>
+<tr>
+<td>site_status_code</td>
+<td><code>int</code></td>
+<td>Identifier for the status of the site</td>
+</tr>
+</tbody></table>
+
+<!-- Converted with the swagger-to-slate https://github.com/lavkumarv/swagger-to-slate -->
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="shell">cURL</a>
+                <a href="#" data-language-name="python">Python</a>
           </div>
       </div>
     </div>
