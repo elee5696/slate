@@ -27,10 +27,9 @@ r = requests.get(url, headers=headers)
 print(r.json())
 ```
 
-|Category|Value|
+|Http request|URL|
 |---------|-------|
-|Http request| `GET`|
-|URL|api.techscapevr.com/common/languages/{titleID}|
+|`GET`|api.techscapevr.com/common/languages/{titleID}|
 
 ### Request Parameters
 
@@ -88,10 +87,9 @@ r = requests.get(url, headers=headers)
 print(r.json())
 ```
 
-|Category|Value|
+|Http request|URL|
 |---------|-------|
-|Http request| `GET`|
-|URL|api.techscapevr.com/common/sites|
+|`GET`|api.techscapevr.com/common/sites|
 
 ### Request Parameters
 There are no parameters for this request.
@@ -150,7 +148,7 @@ There are no parameters for this request.
 |tz|`string`|Timezone of the site
 |pod_count|`int`|Number of pods at the site|
 |ticketing_partner_id|`string`|Partner used for ticketing at the site|
-|dma_code|`string`|
+|dma_code|`string`|Designated Market Area, market region indentifier as assigned by [Nielsen] (https://www.nielsen.com/us/en/contact-us/intl-campaigns/dma-maps/)
 |active_date|`string`|The date that the site opened|
 |tlc|`string`|Three character indentifier for the site
 |status_code|`string`|Identifier for the status of the site|
@@ -179,10 +177,9 @@ Information on Dreamscape titles are accessible through this enpoint.
 `licensed_sites` also contains specific information for sites showing a title (e.g., ticket price).
 
 ### Request Information
-|Category    |Value|
+|HTTP Request|URL|
 |------------|-----|
-|Http request|`GET`|
-|URL|api.techscapevr.com/common/titles|
+|`GET`|api.techscapevr.com/common/titles|
 
 ### Request Parameters
 
@@ -250,13 +247,13 @@ There are no parameters for this request.
 |synopsis|`string`|Summary of the title|
 |genre|`string`|Genre identifiers for the title|
 |rating|`string`|ESRB rating for the title|
-|content_partner_id|`string`|
+|content_partner_id|`string`|Co-owners of the titles IP|
 |duration_sec|`int`|Total duration|
 |max_player_count|`int`|The maximum number of players supported|
 |release_date|`string`|Date when the title was released|
 |game_engine|`string`|The game engine used to create the title|
-|eidr_id|`string`|
-|isan_id|`string`|
+|eidr_id|`string`|[Entertainment Identifier Registry] (https://www.eidr.org/about-us/)
+|isan_id|`string`|[International Standard Audiovisual Number] (https://www.dga.org/Resources/ISAN.aspx)
 |min_player_count|`int`|The minimum number of players needed for the title|
 |tlc|`string`|Three letter identifer for the title
 |status_code|`int`|Status identifier|
@@ -267,8 +264,8 @@ There are no parameters for this request.
 |ticketing_active_time|`string`|Total time title has been available|
 |ticketing_end_date|`string`|Date when title will no longer be available|
 |active_date|`string`|Date when title became available|
-|sunset_date|`string`|
-|end_date|`string`|Date when title became unavailable|
+|sunset_date|`string`|Date when title becomes discontinued|
+|end_date|`string`|Date when title became unavailable at a specific site|
 |gearup_duration_sec|`number`|The time in seconds it takes to fully gear a player|
 |pod_duration_sec|`number`|The time in seconds the pod will be used for the title|
 |base_price|`int`|The base price of one ticket for the title|
