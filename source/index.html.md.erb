@@ -4,6 +4,7 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell: cURL
   - python: Python
+  - javascript: Javascript
 
 toc_footers:
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
@@ -40,10 +41,20 @@ r = requests.get(url, headers=headers)
 print(r.json())
 ```
 
+```javascript
+fetch("api.hq.dev.techscapevr.com/common/sites", {
+    method: 'GET',
+    headers: {
+        'x-api-key' : "<Your API Key>"
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+```
 
 Dreamscape uses API keys for authentication.
-Do not share your API key publicaly, this includes places like GitHub and in your own code.
 
+Do not share your API key publicaly, this includes places like GitHub and in your own code.
 To make use of your API key include it as a header in your http request
 
 `x-api-keys: <Your API key>`

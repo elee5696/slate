@@ -27,6 +27,17 @@ r = requests.get(url, headers=headers)
 print(r.json())
 ```
 
+```javascript
+fetch("https://api.hq.dev.techscapevr.com/common/languages/alienzoo01", {
+    method: 'GET',
+    headers: {
+        'x-api-key' : "<Your API Key>"
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+```
+
 |Http request|URL|
 |---------|-------|
 |`GET`|api.techscapevr.com/common/languages/{titleID}|
@@ -85,6 +96,17 @@ headers = {'x-api-key': '{API Key}'}
 
 r = requests.get(url, headers=headers)
 print(r.json())
+```
+
+```javascript
+fetch("https://api.hq.dev.techscapevr.com/common/sites", {
+    method: 'GET',
+    headers: {
+        'x-api-key' : "<Your API Key>"
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data))
 ```
 
 |Http request|URL|
@@ -171,6 +193,17 @@ headers = {'x-api-key': '{API Key}'}
 
 r = requests.get(url, headers=headers)
 print(r.json())
+```
+
+```javascript
+fetch("https://api.hq.dev.techscapevr.com/common/titles", {
+    method: 'GET',
+    headers: {
+        'x-api-key' : "<Your API Key>"
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data))
 ```
 
 Information on Dreamscape titles are accessible through this enpoint.
